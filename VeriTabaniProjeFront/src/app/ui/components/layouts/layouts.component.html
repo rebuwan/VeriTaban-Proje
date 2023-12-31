@@ -1,0 +1,18 @@
+<body [ngClass]=" sideBar ? '' : 'toggle-sidebar'">
+  <!-- ======= Header ======= -->
+  <app-header [durum]="sideBar" (sideBar)="degis($event)"></app-header>
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <app-sidebar></app-sidebar>
+  <!-- End Sidebar-->
+
+  <!-- ======= Main ======= -->
+  <router-outlet></router-outlet
+  ><!-- End Mmain -->
+
+  <!-- ======= Footer ======= -->
+    <app-footer></app-footer>
+  <!-- End Footer -->
+
+</body>

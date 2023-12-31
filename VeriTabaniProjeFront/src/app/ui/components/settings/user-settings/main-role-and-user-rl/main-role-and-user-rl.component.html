@@ -1,0 +1,98 @@
+<div class="modal-header p-3">
+  <h2
+    class="p-2 text-center text-gray-600 fw-bold fs-2"
+    style="color: #38a3d4 !important"
+  >
+    {{ mainRoleAndUserRL.userName }} {{ mainRoleAndUserRL.userLastName }} |
+    {{ mainRoleAndUserRL.mainRoleTitle }}
+  </h2>
+  <div class="btn btn-icon btn-sm btn-active-icon-primary">
+    <i class="ki-outline ki-cross fs-1" (click)="closeDetail()"></i>
+  </div>
+</div>
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+  <div class="d-flex flex-column flex-column-fluid">
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+      <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush">
+          <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+            <div class="card-title w-100 align-items-center">
+              <div
+                class="d-flex align-items-center header"
+                style="box-shadow: none !important"
+              >
+                <form
+                  class="search-form d-flex align-items-center"
+                  method="POST"
+                  action="#"
+                  style="max-width: 400px"
+                >
+                  <input
+                    type="text"
+                    name="query"
+                    placeholder="Ana Rolün Adı..."
+                    title="Enter search keyword"
+                    [(ngModel)]="searchNameText"
+                  />
+                  <button type="submit" title="Search" (click)="getAllByFilter()">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-0" style="border-radius: 20px">
+            <table
+              class="table align-middle table-row-dashed fs-6 gy-5"
+              id="kt_ecommerce_products_table"
+            >
+              <!-- <thead>
+                    <tr
+                      class="text-start text-gray-800 fw-bold fs-7 text-uppercase gs-0 sticky-header"
+                    >
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead> -->
+              <tbody class="fw-semibold text-gray-700">
+                <tr
+                  *ngFor="let mainRole of resultFilter.datas; let index = index"
+                >
+                  <td>{{ mainRole.mainRoleTitle }}</td>
+                  <td
+                    class="text-end pe-0 noneVisibleWithSize"
+                    data-order="Published"
+                  >
+                    <div
+                      class="form-check form-switch form-check-custom form-check-solid"
+                      style="display: block"
+                    >
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        style="
+                          width: 45px !important;
+                          height: 20px;
+                          float: none !important;
+                        "
+                        value=""
+                        id="customSwitch{{ mainRole.mainRoleId }}"
+                        [checked]="mainRole.isActive"
+                        (click)="roleIsHaveChange(mainRole.mainRoleId)"
+                      />
+                      <label
+                        class="form-check-label fw-semibold text-gray-400 ms-3"
+                        for="allowchanges"
+                      ></label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="modal-header mt-0 p-3">
+  <h2 class="p-2 text-center text-gray-600 fw-bold fs-2">Ana Rol Oluştur</h2>
+  <div
+    class="btn btn-icon btn-sm btn-active-icon-primary"
+    (click)="closePopup()"
+    data-bs-dismiss="modal"
+  >
+    <i class="ki-outline ki-cross fs-1"></i>
+  </div>
+</div>
+
+<form
+  class="container mt-2"
+  #createForm="ngForm"
+  (ngSubmit)="create(createForm)"
+>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 form-group">
+      <label class="fs-6 fw-semibold form-label mt-3">
+        <span class="required">Ana Rol Adı</span>
+        <span class="ms-1">
+          <i class="ki-outline ki-information fs-7"></i>
+        </span>
+      </label>
+      <input
+        type="text"
+        ngModel
+        class="form-control"
+        #title
+        name="title"
+        id="title"
+        placeholder="Ana Rol Adı"
+        required
+      />
+    </div>
+    <div class="col-md-6 col-sm-6 form-group">
+      <label for="departmentId" class="fs-6 fw-semibold form-label mt-3">
+        <span>Bölüm</span>
+        <span class="ms-1">
+          <i class="ki-outline ki-information fs-7" style="color: red"></i>
+        </span>
+      </label>
+      <select
+        class="form-select form-control"
+        #departmentId
+        name="departmentId"
+        id="departmentId"
+        [(ngModel)]="selectedDepartmentType"
+        required
+      >
+        <option value="-1" disable selected>Bölüm Seç</option>
+        <option
+          *ngFor="let departmentType of departmentTypes"
+          [value]="departmentType.id"
+        >
+          {{ departmentType.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row modal-footer flex-end p-5">
+    <button (click)="create(createForm)" type="button" class="btn btn-primary">
+      Kaydet
+    </button>
+  </div>
+</form>
+

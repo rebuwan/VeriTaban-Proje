@@ -1,0 +1,58 @@
+<div class="modal-header p-2">
+    <h2 class="p-2 text-center text-gray-600 fw-bold fs-2">Cari Güncelleme</h2>
+    <div
+      class="btn btn-icon btn-sm btn-active-icon-primary"
+      data-bs-dismiss="modal"
+    >
+      <i (click)="closePopup()" class="ki-outline ki-cross fs-1"></i>
+    </div>
+  </div>
+  
+  <form
+    class="container p-4"
+    #updateForm="ngForm"
+    (ngSubmit)="update(updateForm)"
+  >
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-12 form-group align-items-center">
+        <label for="title" class="fs-6 fw-semibold form-label mt-3">
+          <span>Ana Rol Başlığı</span>
+          <span class="ms-1">
+            <i class="ki-outline ki-information fs-7"></i>
+          </span>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="updateModel.title"
+          class="form-control"
+          #title
+          name="title"
+          id="title"
+          placeholder="Ana Rol"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-12 text-end mt-2">
+      <button
+        (click)="closePopup()"
+        type="reset"
+        id="kt_modal_add_product_cancel"
+        class="btn btn-light-primary me-3 w-40"
+      >
+        Kapat
+      </button>
+  
+      <button
+        type="button"
+        id="kt_modal_add_product_submit"
+        class="btn btn-primary"
+        (click)="update(updateForm)"
+      >
+        <span class="indicator-label"> Kaydet </span>
+      </button>
+    </div>
+  </form>
+  
+  
+  

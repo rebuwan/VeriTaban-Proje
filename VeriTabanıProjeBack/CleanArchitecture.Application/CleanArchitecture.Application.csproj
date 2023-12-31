@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFrameworkCorePagination.Nuget" Version="1.0.3" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CleanArchitecture.Domain\CleanArchitecture.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\DepartmentFeatures\Commands\UpdateDepartment\" />
+    <Folder Include="Features\DepartmentFeatures\Queries\GetAllDepartmentByFilter\" />
+    <Folder Include="Features\StaffCourseFeatures\Commands\RemoveStaffCourse\" />
+    <Folder Include="Features\StaffCourseFeatures\Commands\UpdateStaffCourse\" />
+    <Folder Include="Features\StaffFeatures\Queries\GetAllStaffByDeparrtment\" />
+    <Folder Include="Features\StudentCourseFeatures\Commands\RemoveStudentCourse\" />
+    <Folder Include="Features\StudentCourseFeatures\Commands\UpdateStudentCourse\" />
+    <Folder Include="Features\StudentFeatures\Queries\GetAllStudendByDepartment\" />
+  </ItemGroup>
+
+</Project>

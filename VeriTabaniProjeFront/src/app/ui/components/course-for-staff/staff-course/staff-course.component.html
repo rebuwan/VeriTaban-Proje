@@ -1,0 +1,96 @@
+<main id="main" class="main" *ngIf="staffCourseRLRoles.hasStaffCourseRL">
+   <div class="pagetitle">
+      <h1>Dersler</h1>
+      <nav>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Derslerim</li>
+         </ol>
+      </nav>
+   </div>
+   <!-- End Page Title -->
+
+   <section class="section">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="card">
+               <div class="card-title">
+
+                  <div class="d-flex align-items-center header" style="box-shadow: none !important">
+                     <form class="search-form d-flex align-items-center" method="POST" action="#"
+                        style="max-width: 300px">
+                        <input type="text" name="query" placeholder="Dersin Adı..." title="Enter search keyword"
+                           [(ngModel)]="searchNameText" />
+                        <button type="submit" title="Search">
+                           <i class="bi bi-search"></i>
+                        </button>
+                     </form>
+                  </div>
+               </div>
+               <div class="card-body">
+                  <!-- Table with hoverable rows -->
+                  <table class="table table-th-block p-2">
+                     <thead>
+                        <tr>
+                           <th class="text-center">#</th>
+                           <th class="text-center">Kurs Adı</th>
+                           <th class="text-center">Kurs Kodu</th>
+                           <th class="text-center">Kredisi</th>
+                           <th class="text-center">Öğrenci Sayısı</th>
+                           <th class="text-center">İşlemler</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let course of Courses.datas; let index = index">
+                           <th class="text-center">
+                              {{ index + 1 + (pageNumber - 1) * pageSize }}
+                           </th>
+                           <td class="text-center">{{ course.courseCode }}</td>
+                           <td class="text-center">{{ course.courseName }}</td>
+                           <td class="text-center">{{ course.courseCredit }}</td>
+                           <td class="text-center">{{ course.studentCount }}</td>
+                           <td class="text-center"> <div class="btn btn-primary mx-0" (click)="detail(course)">Ders Detay</div></td>
+
+                        </tr>
+                     </tbody>
+                  </table>
+                  <!-- End Table with hoverable rows -->
+
+                  <div class="row">
+                     <div class="col-md-6">
+                        <span class="w-100 border border-2 rounded-3 px-2 py-1 shadow"
+                           style="font-size: 18px; border-color: rgb(0, 106, 255) !important;"><i
+                              style="font-size: 18px" class="fa-solid fa-users"></i>
+                           {{
+                           Courses && Courses.datas
+                           ? Courses.datas[0]?.totalCount
+                           : 0
+                           }}
+                           Ders</span>
+                     </div>
+                     <div class="col-md-6">
+                        <nav aria-label="Page navigation example" *ngIf="Courses.totalPages > 1">
+                           <ul class="pagination justify-content-end">
+                              <li class="page-item" *ngIf="!Courses.isFirstPage">
+                                 <a class="page-link" (click)="getAllByFilter(pageNumber - 1)">Önceki</a>
+                              </li>
+                              <li class="page-item" [ngClass]="Courses.pageNumber == n ? 'active' : ''"
+                                 *ngFor="let n of pageNumbers">
+                                 <a class="page-link" (click)="getAllByFilter(n)">{{
+                                    n
+                                    }}</a>
+                              </li>
+                              <li class="page-item">
+                                 <a class="page-link" (click)="getAllByFilter(pageNumber + 1)"
+                                    *ngIf="!Courses.isLastPage">Sonraki</a>
+                              </li>
+                           </ul>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</main>

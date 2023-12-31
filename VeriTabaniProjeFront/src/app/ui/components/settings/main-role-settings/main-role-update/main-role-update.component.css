@@ -1,0 +1,85 @@
+/* 
+.container{
+    height: 550px;
+    overflow-y: scroll;
+    max-height: 700px; 
+  } */
+
+
+  .container::-webkit-scrollbar {
+    width: 2px; /* Kaydırma çubuğunun genişliği */
+    height: 6px; /* Kaydırma çubuğunun yüksekliği */
+  }
+  
+  .container::-webkit-scrollbar-thumb {
+    background-color: #888888; /* Kaydırma çubuğu dolgu rengi */
+    border-radius: 6px; /* Kaydırma çubuğu kenar yarıçapı */
+  }
+  
+  .container::-webkit-scrollbar-thumb:hover {
+    background-color: #9f20d9; /* (hover durumunda) */
+  }
+  
+  .buttonGroups {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+  }
+  /* Kapalı durumdaki toggle switch */
+  .form-check-input[type="checkbox"]:not(:checked) {
+    background-color: #bcbcbc;
+  }
+  
+  /* Kapalı durumdaki toggle switch'in etiketi */
+  .form-check-label[for="allowchanges"]:before {
+    background-color: #bcbcbc;
+  }
+  
+  .modal-header {
+    background-color: #dadada;
+    height: 60px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+  }
+  
+  .cardtitle {
+    color: #050505;
+  }
+  
+  .custom-input {
+    height: 120px;
+  }
+  
+  .btn-light-primary {
+    background-color: #dadada;
+  }
+  
+  .btn {
+    width: 100px;
+  }
+  
+  .card-title {
+    color: rgb(0, 0, 0);
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .badge {
+    font-size: 5px;
+    align-items: center;
+    height: 32px;
+    width: 200px;
+  }
+  
+  .card-toolbar.responsivProcess {
+    display: block;
+    flex-direction: row !important;
+  }
+  
+  .card-toolbar.responsivProcessMobil {
+    display: none;
+  }

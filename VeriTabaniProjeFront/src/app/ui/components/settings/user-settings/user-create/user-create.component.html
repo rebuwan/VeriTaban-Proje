@@ -1,0 +1,168 @@
+<div class="modal-header mt-0 p-3">
+  <h2 class="p-2 text-center text-gray-600 fw-bold fs-2">Personel Ekle</h2>
+  <div
+    class="btn btn-icon btn-sm btn-active-icon-primary"
+    (click)="closeDetail()"
+    data-bs-dismiss="modal"
+  >
+    <i
+      class="ki-outline ki-cross fs-1 justify-content-center align-items-center color-dark"
+    ></i>
+  </div>
+</div>
+
+<form
+  class="container p-4"
+  #createForm="ngForm"
+  (ngSubmit)="create(createForm)"
+>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 form-group mt-6">
+      <label for="imageData" class="fs-6 fw-semibold form-label mt-3 w-100">
+        <span>Resim Seç</span>
+        <span class="ms-1">
+          <i class="ki-outline ki-information fs-7" style="color: red"></i>
+        </span>
+      </label>
+      <img [src]="selectedImage" style="width: auto; height: 200px" />
+      <label class="btn btn-light-primary w-50" style="display: block">
+        <i class="ki-outline ki-exit-up fs-2">
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            style="width: 0 !important; height: 0 !important"
+            multiple
+            accept=".png, .jpg, .jpeg"
+          />
+        </i>
+        Dosya Yükle
+      </label>
+    </div>
+
+    <div class="col-md-6 col-sm-6 form-group mt-6">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 form-group mt-2">
+          <div class="mx-1">
+            <label for="name" class="fs-6 fw-semibold form-label mt-3">
+              <span class="required">Kullanıcının Adı</span>
+              <span class="ms-1">
+                <i class="ki-outline ki-information fs-7"></i>
+              </span>
+            </label>
+            <input
+              type="text"
+              ngModel
+              class="form-control"
+              #name
+              name="name"
+              id="name"
+              placeholder="Kullanıcının Adı"
+              required
+              [validInput]="name.validity.valid"
+            />
+            <div class="invalid-feedback">Personel Kodu Alanı Zorunludur.</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 form-group mt-2">
+          <label for="lastName" class="fs-6 fw-semibold form-label mt-3">
+            <span class="required">Kullanıcının Soyadı</span>
+            <span class="ms-1">
+              <i class="ki-outline ki-information fs-7"></i>
+            </span>
+          </label>
+          <div class="input-group">
+            <input
+              type="text"
+              ngModel
+              class="form-control"
+              #lastName
+              name="lastName"
+              id="lastName"
+              placeholder="Kullanıcının Soyadı"
+              required
+              [validInput]="lastName.validity.valid"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-sm-6 form-group mt-2">
+          <div class="mx-1 mt-2">
+            <label for="departmentId" class="fs-6 fw-semibold form-label mt-3">
+              <span>Bölüm</span>
+              <span class="ms-1">
+                <i
+                  class="ki-outline ki-information fs-7"
+                  style="color: red"
+                ></i>
+              </span>
+            </label>
+            <select
+              class="form-select form-control"
+              #departmentId
+              name="departmentId"
+              id="departmentId"
+              [(ngModel)]="selectedDepartmentType"
+              required
+            >
+              <option value="-1" disable selected>Bölüm Seç</option>
+              <option
+                *ngFor="let departmentType of departmentTypes"
+                [value]="departmentType.id"
+              >
+                {{ departmentType.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 form-group mt-2">
+          <div class="mx-1 mt-2">
+            <label for="birthdate" class="fs-6 fw-semibold form-label mt-3">
+              <span>Doğum Tarihi</span>
+              <span class="ms-1">
+                <i
+                  class="ki-outline ki-information fs-7"
+                  style="color: red"
+                ></i>
+              </span>
+            </label>
+            <input
+              type="date"
+              ngModel
+              class="form-control"
+              #birthdate
+              name="birthdate"
+              id="birthdate"
+              placeholder="Doğum Tarihi"
+              required
+              [validInput]="birthdate.validity.valid"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 text-end mt-2">
+    <button
+      (click)="closeDetail()"
+      type="reset"
+      id="kt_modal_add_product_cancel"
+      class="btn btn-light-primary me-3 w-40"
+    >
+      Kapat
+    </button>
+
+    <button
+      [disabled]="!createForm.valid"
+      type="button"
+      id="kt_modal_add_product_submit"
+      class="btn btn-primary"
+      (click)="create(createForm)"
+    >
+      <span class="indicator-label"> Kaydet </span>
+    </button>
+  </div>
+</form>

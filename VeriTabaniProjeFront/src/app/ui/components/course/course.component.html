@@ -1,0 +1,246 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Dersler</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
+        <li class="breadcrumb-item active">Dersler</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section" *ngIf="courseRoles.hasReadPermission">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-title">
+            <div
+              class="d-flex align-items-center header"
+              style="box-shadow: none !important"
+            >
+              <form
+                class="search-form d-flex align-items-center"
+                method="POST"
+                action="#"
+                style="max-width: 300px"
+                *ngIf="courseRoles.hasReadPermission"
+              >
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="Ders Adı/Kodu..."
+                  title="Enter search keyword"
+                  [(ngModel)]="searchNameText"
+                />
+                <button type="submit" title="Search" (click)="getAllByFilter()">
+                  <i class="bi bi-search"></i>
+                </button>
+              </form>
+              <div
+                class="card-toolbar d-flex justify-content-end gap-4"
+                style="flex: 1 auto; padding-right: 20px"
+                *ngIf="courseRoles.hasCreatePermission"
+              >
+                <button
+                  class="btn btn-outline-primary w-110px"
+                  (click)="courseCreateState()"
+                >
+                  Ders Ekle
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">Sıra</th>
+                  <th class="text-center">Kodu</th>
+                  <th class="text-center">Adı</th>
+                  <th class="text-center">Kredi</th>
+                  <th class="text-center">Aktif Mi</th>
+                  <th
+                    class="text-center"
+                    *ngIf="
+                      courseRoles.hasDeletePermission ||
+                      courseRoles.hasUpdatePermission ||
+                      courseRoles.hasDetailBtnPermission
+                    "
+                  >
+                    İşlemler
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of Courses.datas; let index = index">
+                  <th class="text-center">
+                    {{ index + 1 + (pageNumber - 1) * pageSize }}
+                  </th>
+                  <td class="text-center">{{ course.code }}</td>
+                  <td class="text-center">{{ course.name }}</td>
+                  <td class="text-center">{{ course.credit }}</td>
+                  <td
+                    class="text-center"
+                    data-order="Published"
+                    style="padding-left: 10px !important"
+                  >
+                    <div
+                      class="form-check form-switch form-check-custom"
+                      style="display: block"
+                    >
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        style="
+                          width: 45px !important;
+                          height: 20px;
+                          float: none !important;
+                        "
+                        [disabled]="!courseRoles.hasIsActiveBtnPermission"
+                        value=""
+                        id="customSwitch{{ course.id }}"
+                        [checked]="course.isActive"
+                        (click)="changeActiveState(course.id, !course.isActive)"
+                      />
+                      <label
+                        for="allowchanges"
+                        class="form-check-label fw-semibold text-gray-400 ms-3"
+                      ></label>
+                    </div>
+                  </td>
+                  <td
+                    class="text-center"
+                    *ngIf="
+                      courseRoles.hasDeletePermission ||
+                      courseRoles.hasUpdatePermission ||
+                      courseRoles.hasDetailBtnPermission
+                    "
+                  >
+                    <div class="dropdown dropdown-center">
+                      <button
+                        class="btn btn-outline-primary dropdown-toggle rounded-pill"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        İşlemler
+                      </button>
+                      <ul style="cursor: pointer" class="dropdown-menu">
+                        <li *ngIf="courseRoles.hasDeletePermission">
+                          <a
+                            class="dropdown-item hover-effect"
+                            (click)="removeById(course.id)"
+                          >
+                            <span
+                              class="badge badge-light-danger fs-base rounded-pill d-flex align-items-center justify-content-center"
+                              style="
+                                padding-top: 0.3rem;
+                                padding-bottom: 0.3rem;
+                              "
+                            >
+                              <i class="fa-solid fa-trash-can text-danger"></i>
+                              Sil
+                            </span>
+                          </a>
+                        </li>
+                        <li *ngIf="courseRoles.hasUpdatePermission">
+                          <a
+                            class="dropdown-item hover-effect"
+                            (click)="updateState(course)"
+                          >
+                            <span
+                              class="badge py-3 px-4 fs-7 badge-light-warning text-center rounded-pill d-flex align-items-center justify-content-center"
+                              style="
+                                padding-top: 0.3rem;
+                                padding-bottom: 0.3rem;
+                              "
+                            >
+                              <i
+                                class="fa-solid fa-pen-to-square text-warning"
+                              ></i>
+                              Güncelle
+                            </span>
+                          </a>
+                        </li>
+                        <li *ngIf="courseRoles.hasDetailBtnPermission">
+                          <a
+                            class="dropdown-item hover-effect"
+                            (click)="detailState(course)"
+                          >
+                            <span
+                              class="badge badge-light-success fs-base text-center rounded-pill d-flex align-items-center justify-content-center"
+                              style="
+                                padding-top: 0.3rem;
+                                padding-bottom: 0.3rem;
+                              "
+                            >
+                              <i class="fa-solid fa-eye text-success ms-n1"></i>
+                              Detay
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+            <div class="row">
+              <div class="col-md-6">
+                <span
+                  class="w-100 border border-2 rounded-3 px-2 py-1 shadow"
+                  style="
+                    font-size: 18px;
+                    border-color: rgb(0, 106, 255) !important;
+                  "
+                  ><i style="font-size: 18px" class="fa-solid fa-users"></i>
+                  {{
+                    Courses && Courses.datas ? Courses.datas[0]?.totalCount : 0
+                  }}
+                  Ders</span
+                >
+              </div>
+              <div class="col-md-6">
+                <nav
+                  aria-label="Page navigation example"
+                  *ngIf="Courses.totalPages > 1"
+                >
+                  <ul class="pagination justify-content-end">
+                    <li class="page-item" *ngIf="!Courses.isFirstPage">
+                      <a
+                        class="page-link"
+                        (click)="getAllByFilter(pageNumber - 1)"
+                        >Önceki</a
+                      >
+                    </li>
+                    <li
+                      class="page-item"
+                      [ngClass]="Courses.pageNumber == n ? 'active' : ''"
+                      *ngFor="let n of pageNumbers"
+                    >
+                      <a class="page-link" (click)="getAllByFilter(n)">{{
+                        n
+                      }}</a>
+                    </li>
+                    <li class="page-item">
+                      <a
+                        class="page-link"
+                        (click)="getAllByFilter(pageNumber + 1)"
+                        *ngIf="!Courses.isLastPage"
+                        >Sonraki</a
+                      >
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

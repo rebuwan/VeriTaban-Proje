@@ -1,0 +1,131 @@
+<main>
+  <div class="container">
+    <section
+      class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div
+            class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="d-flex justify-content-center py-4">
+              <a href="/" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">Öğrenci Bilgi Sistemi</span>
+              </a>
+            </div>
+            <!-- End Logo -->
+
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">
+                    Bir Hesap Oluştur
+                  </h5>
+                  <p class="text-center small">
+                    Hesap oluşturmak için kişisel bilgilerinizi giriniz
+                  </p>
+                </div>
+
+                <form
+                  class="row g-3 needs-validation"
+                  novalidate
+                  #loginFirst="ngForm"
+                  (ngSubmit)="loginFirstTime(loginFirst)"
+                >
+                  <div class="col-15">
+                    <label for="birthdate" class="fs-6 fw-semibold form-label mt-3">
+                      <span>Doğum Tarihi</span>
+                      <span class="ms-1">
+                        <i
+                          class="ki-outline ki-information fs-7"
+                          style="color: red"
+                        ></i>
+                      </span>
+                    </label>
+                    <input
+                      type="date"
+                      ngModel
+                      class="form-control"
+                      #birthdate
+                      name="birthdate"
+                      id="birthdate"
+                      placeholder="Doğum Tarihi"
+                      required
+                      [validInput]="birthdate.validity.valid"
+                    />
+                  </div>
+
+                  <div class="col-12">
+                    <label for="userId" class="form-label"
+                      >Öğrenci/Öğretmen Numarası</label
+                    >
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend"
+                        >@</span
+                      >
+                      <input
+                        type="text"
+                        name="userId"
+                        class="form-control"
+                        id="userId"
+                        #userId
+                        ngModel
+                        required
+                        [validInput]="userId.validity.valid"
+                      />
+                      <div class="invalid-feedback">
+                        En az 3 karakter olmalıdır..!
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="password" class="form-label">Şifresi</label>
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      id="password"
+                      #password
+                      required
+                      ngModel
+                      [validInput]="password.validity.valid"
+                    />
+                    <div class="invalid-feedback">
+                      1 Küçük H.- 1 Büyük H.- 1 Rakam - 1 Özel Karakter
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button
+                      class="btn btn-primary w-100"
+                      type="button"
+                      (click)="loginFirstTime(loginFirst)"
+                      [disabled]="!loginFirst.valid"
+                    >
+                      Hesap Oluştur
+                    </button>
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0">
+                      Zaten Bir Hesabını Var Mı? <a routerLink="/login">Giriş Yap</a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="credits">
+              <!-- All the links in the footer should remain intact. -->
+              <!-- You can delete the links only if you purchased the pro version. -->
+              <!-- Licensing information: https://bootstrapmade.com/license/ -->
+              <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<!-- End #main -->

@@ -1,0 +1,87 @@
+<div class="modal-header mt-0 p-3">
+   <h2 class="p-2 text-center text-gray-600 fw-bold fs-2">Ders Ekle</h2>
+   <div class="btn btn-icon btn-sm btn-active-icon-primary" (click)="closeDetail()" data-bs-dismiss="modal">
+      <i class="ki-outline ki-cross fs-1 justify-content-center align-items-center color-dark"></i>
+   </div>
+</div>
+
+<form class="container p-4" #createForm="ngForm" (ngSubmit)="create(createForm)">
+   <div class="row">
+
+      <div class="row">
+         <div class="col-md-6 col-sm-6 form-group mt-2">
+            <div class="mx-1">
+               <label for="courseCode" class="fs-6 fw-semibold form-label mt-3">
+                  <span class="required">Ders Kodu</span>
+                  <span class="ms-1">
+                     <i class="ki-outline ki-information fs-7"></i>
+                  </span>
+               </label>
+               <input type="text" ngModel class="form-control" #courseCode name="courseCode" id="courseCode"
+                  placeholder="Ders Kodu" required [validInput]="courseCode.validity.valid" />
+               <div class="invalid-feedback">Ders Kodu Alanı Zorunludur.</div>
+            </div>
+         </div>
+
+         <div class="col-md-6 col-sm-6 form-group mt-2">
+            <label for="courseName" class="fs-6 fw-semibold form-label mt-3">
+               <span class="required">Ders Adı</span>
+               <span class="ms-1">
+                  <i class="ki-outline ki-information fs-7"></i>
+               </span>
+            </label>
+            <div class="input-group">
+               <input type="text" ngModel class="form-control" #courseName name="courseName" id="courseName"
+                  placeholder="Ders Adı" required [validInput]="courseName.validity.valid" />
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-8">
+            <div class="mx-1 mt-2">
+               <label for="departmentId" class="fs-6 fw-semibold form-label mt-3">
+                  <span>Bölüm</span>
+                  <span class="ms-1">
+                     <i class="ki-outline ki-information fs-7" style="color: red"></i>
+                  </span>
+               </label>
+               <select class="form-select form-control" #departmentId name="departmentId" id="departmentId"
+                  [(ngModel)]="selectedDepartmentType" required>
+                  <option value="-1" disable selected>Bölüm Seç</option>
+                  <option *ngFor="let departmentType of departmentTypes" [value]="departmentType.id">
+                     {{ departmentType.name }}
+                  </option>
+               </select>
+            </div>
+         </div>
+
+         <div class="col-md-4">
+            <div class="mx-1">
+               <label for="credit" class="fs-6 fw-semibold form-label mt-3">
+                  <span class="required">Kredi</span>
+                  <span class="ms-1">
+                     <i class="ki-outline ki-information fs-7"></i>
+                  </span>
+               </label>
+               <input type="number" min="1" ngModel class="form-control" #credit name="credit" id="credit"
+                  placeholder="0" required [validInput]="credit.validity.valid" />
+               <div class="invalid-feedback">Kredi Alanı Zorunludur.</div>
+            </div>
+         </div>
+      </div>
+      
+   </div>
+
+
+   <div class="col-md-12 text-end mt-2">
+      <button (click)="closeDetail()" type="reset" id="kt_modal_add_product_cancel"
+         class="btn btn-light-primary me-3 w-40">
+         Kapat
+      </button>
+
+      <button [disabled]="!createForm.valid" type="button" id="kt_modal_add_product_submit" class="btn btn-primary"
+         (click)="create(createForm)">
+         <span class="indicator-label"> Kaydet </span>
+      </button>
+   </div>
+</form>

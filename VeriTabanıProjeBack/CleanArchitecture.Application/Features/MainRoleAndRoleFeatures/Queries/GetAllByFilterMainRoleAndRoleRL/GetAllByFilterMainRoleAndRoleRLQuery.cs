@@ -1,0 +1,4 @@
+﻿using CleanArchitecture.Application.Messaging;
+
+namespace CleanArchitecture.Application.Features.MainRoleAndRoleFeatures.Queries.GetAllByFilterMainRoleAndRoleRL;
+public sealed record GetAllByFilterMainRoleAndRoleRLQuery() : IQuery<GetAllByFilterMainRoleAndRoleRLQueryResponse>;

@@ -1,0 +1,73 @@
+<div class="modal-header p-3">
+    <h2 class="p-2 text-center text-gray-600 fw-bold fs-2">Ders Detayları</h2>
+    <div class="btn btn-icon btn-sm btn-active-icon-primary">
+      <i class="ki-outline ki-cross fs-1" (click)="closeDetail()"></i>
+    </div>
+  </div>
+  
+  <div class="row p-2">
+    <div class="col-md-4 mt-5 m-auto">
+      <div class="card mb-1">
+        <div class="card-body text-center">
+          <img
+            src="https://localhost:7235{{detailModel.photoUrl}}"
+            alt="{{ detailModel.name}}"
+            class="img-fluid rounded-circle mb-2 w-50"
+            width="auto"
+            height="200px"
+          />
+          <h4 class="card-title mb-0">Öğrenci Adı: {{ detailModel.name }} {{ detailModel.lastName }}</h4>
+          <div class="text-muted mb-10">Öğrenci Numarası: {{ detailModel.studentNo }}</div>
+          <div class="mb-5">Yaşı: {{age}}</div>
+            <h4 class="card-title mb-0">Bölümü: {{detailModel.departmentName}}</h4>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container col-md-12 mt-5">
+      <div class="row">
+        <div class="col-md-12 col-xl-12 p-2">
+          <div class="card">
+            <div class="card-body">
+              <div class="media">
+                <table class="table table-th-block p-2">
+                    <thead>
+                        <tr>
+                          <th class="text-center">#</th>
+                          <th class="text-center">Kurs Adı</th>
+                          <th class="text-center">Kurs Kodu</th>
+                          <th class="text-center">Dersi Veren</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let course of resultFilter.datas; let index = index"
+                        >
+                          <th class="text-center">
+                            {{ index + 1 + (pageNumber - 1) * pageSize }}
+                          </th>
+                          <td class="text-center">{{ course.courseName }}</td>
+                          <td class="text-center">{{ course.courseCode }}</td>
+                          <td class="text-center">{{ course.staffName }}</td>
+                        </tr>
+                      </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="modal-footer flex-end p-2">
+        <button
+          (click)="closeDetail()"
+          type="button"
+          id="kt_modal_add_product_submit"
+          class="btn btn-primary ms-15"
+        >
+          <span class="indicator-label"> Kapat </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  

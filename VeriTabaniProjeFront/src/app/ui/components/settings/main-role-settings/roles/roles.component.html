@@ -1,0 +1,218 @@
+<div class="modal-header p-3">
+  <h2
+    class="p-2 text-center text-gray-600 fw-bold fs-2"
+    style="color: #38a3d4 !important"
+  >
+    {{ mainRoleData.title }}
+  </h2>
+  <div class="btn btn-icon btn-sm btn-active-icon-primary">
+    <i class="ki-outline ki-cross fs-1" (click)="closeDetail()"></i>
+  </div>
+</div>
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+  <div class="d-flex flex-column flex-column-fluid">
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+      <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush">
+          <div class="card-body pt-0" style="border-radius: 20px">
+            <table
+              class="table align-middle table-row-dashed fs-6 gy-5"
+              id="kt_ecommerce_products_table"
+            >
+              <thead>
+                <div class="row">
+                  <div class="tab" role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li role="presentation">
+                        <button
+                          class="btn {{
+                            selectedMenuItem == 'Öğrenciler'
+                              ? 'active new_back'
+                              : ''
+                          }}"
+                          (click)="getAllByFilter(1, 'Öğrenciler')"
+                          role="tab"
+                          data-toggle="tab"
+                        >
+                          <i class="bi bi-person-lines-fill"></i
+                          ><span> Öğrenciler</span>
+                        </button>
+                      </li>
+                      <li role="presentation">
+                        <button
+                          class="btn {{
+                            selectedMenuItem == 'Personeller'
+                              ? 'active new_back'
+                              : ''
+                          }}"
+                          (click)="getAllByFilter(1, 'Personeller')"
+                          role="tab"
+                          data-toggle="tab"
+                        >
+                          <span>Personeller</span>
+                        </button>
+                      </li>
+                      <li role="presentation">
+                        <button
+                          class="btn {{
+                            selectedMenuItem == 'Dersler'
+                              ? 'active new_back'
+                              : ''
+                          }}"
+                          (click)="getAllByFilter(1, 'Dersler')"
+                          role="tab"
+                          data-toggle="tab"
+                        >
+                          <span>Dersler</span>
+                        </button>
+                      </li>
+                      <li role="presentation">
+                        <button
+                          class="btn {{
+                            selectedMenuItem == 'Öğrenci - Ders İlişkisi'
+                              ? 'active new_back'
+                              : ''
+                          }}"
+                          (click)="getAllByFilter(1, 'Öğrenci - Ders İlişkisi')"
+                          role="tab"
+                          data-toggle="tab"
+                        >
+                          <span>Öğrenci - Ders İlişkisi</span>
+                        </button>
+                      </li>
+                      <li role="presentation">
+                        <button
+                          class="btn {{
+                            selectedMenuItem == 'Öğretmen - Ders İlişkisi'
+                              ? 'active new_back'
+                              : ''
+                          }}"
+                          (click)="getAllByFilter(1, 'Öğretmen - Ders İlişkisi')"
+                          role="tab"
+                          data-toggle="tab"
+                        >
+                          <span>Öğretmen - Ders İlişkisi</span>
+                        </button>
+                      </li>
+                      <li role="presentation">
+                        <button
+                          class="btn {{
+                            selectedMenuItem == 'Bölümler'
+                              ? 'active new_back'
+                              : ''
+                          }}"
+                          (click)="getAllByFilter(1, 'Bölümler')"
+                          role="tab"
+                          data-toggle="tab"
+                        >
+                          <span>Bölümler</span>
+                        </button>
+                      </li>
+                      <li role="presentation">
+                        <button
+                          class="btn {{
+                            selectedMenuItem == 'Ayarlar'
+                              ? 'active new_back'
+                              : ''
+                          }}"
+                          (click)="getAllByFilter(1, 'Ayarlar')"
+                          role="tab"
+                          data-toggle="tab"
+                        >
+                          <span>Ayarlar</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </thead>
+              <tbody
+                class="fw-semibold text-gray-700"
+                *ngFor="let role of resultFilter.datas"
+              >
+                <tr
+                  *ngIf="
+                    active != null
+                      ? active == true
+                        ? role.isActive
+                        : !role.isActive
+                      : true
+                  "
+                >
+                  <td>{{ role.name }}</td>
+                  <td
+                    class="text-center pe-0 noneVisibleWithSize"
+                    data-order="Published"
+                  >
+                    <div
+                      class="form-check form-switch form-check-custom form-check-solid"
+                      style="display: block"
+                    >
+                      <input
+                        class="form-check-input custom-checkbox ng-untouched ng-pristine ng-valid"
+                        type="checkbox"
+                        value=""
+                        id="customSwitch{{ role.id }}"
+                        [checked]="role.isActive"
+                        (click)="roleIsHaveChange(role.id, mainRoleData.id)"
+                      />
+                      <label
+                        class="form-check-label fw-semibold text-gray-400 ms-3"
+                        for="allowchanges"
+                      ></label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="jumbotron">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-8 offset-md-2">
+                    <form
+                      name="form"
+                      (ngSubmit)="(f.form.valid)"
+                      #f="ngForm"
+                      novalidate
+                    >
+                      <div class="form-group">
+                        <div class="switch-toggle switch-3 switch-candy">
+                          <input
+                            id="active"
+                            name="state-d"
+                            type="radio"
+                            (change)="onSelectionChange('true')"
+                          />
+                          <label for="active">Aktif</label>
+
+                          <input
+                            id="all"
+                            name="state-d"
+                            type="radio"
+                            checked="checked"
+                            (change)="onSelectionChange('null')"
+                          />
+                          <label for="all">Tümü</label>
+
+                          <input
+                            id="passive"
+                            name="state-d"
+                            type="radio"
+                            (change)="onSelectionChange('false')"
+                          />
+                          <label for="passive">Pasif</label>
+                          <a></a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
